@@ -11,6 +11,8 @@ import { ActionButton } from '../button/action-button.jsx';
 import { exportScript, ImportPrebakeScriptButton } from './ImportPrebakeScriptButton.jsx';
 import { useRef } from 'react';
 import cx from '@src/cx.mjs';
+import { isTauri } from '../../../tauri.mjs';
+import { NdiSettings } from './NdiSettings.jsx';
 
 const inputClass =
   'bg-background text-xs h-8 max-h-8 border border-box rounded-0 text-foreground border-muted placeholder-muted focus:outline-none focus:ring-0 focus:border-foreground';
@@ -382,6 +384,7 @@ function PrebakeSettingsContent() {
 }
 export function SettingsTab({ started }) {
   const { settingsTab } = useSettings();
+  const hasNdi = typeof window !== 'undefined' && isTauri();
   return (
     <div className="w-full h-full text-foreground flex flex-col overflow-hidden">
       <div className="px-2 shrink-0 h-8 space-x-4 flex max-w-full overflow-x-auto border-b border-muted">
@@ -392,11 +395,14 @@ export function SettingsTab({ started }) {
           items={{
             settings: 'settings',
             prebake: 'prebake',
+            // NDI output needs the native backend of the desktop app
+            ...(hasNdi ? { ndi: 'NDI' } : {}),
           }}
         ></ButtonGroup>
       </div>
       {settingsTab === 'settings' && <MainSettingsContent started={started} />}
       {settingsTab === 'prebake' && <PrebakeSettingsContent />}
+      {settingsTab === 'ndi' && hasNdi && <NdiSettings />}
     </div>
   );
 }

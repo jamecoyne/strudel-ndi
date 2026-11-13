@@ -4,6 +4,7 @@
 mod midibridge;
 mod oscbridge;
 mod loggerbridge;
+mod ndi;
 use std::sync::Arc;
 
 use loggerbridge::Logger;
@@ -23,15 +24,27 @@ fn main() {
   let (async_output_transmitter_osc, async_output_receiver_osc) = mpsc::channel(1);
   tauri::Builder
     ::default()
+    .plugin(tauri_plugin_clipboard_manager::init())
+    .plugin(tauri_plugin_dialog::init())
+    .plugin(tauri_plugin_fs::init())
     .manage(midibridge::AsyncInputTransmit {
       inner: Mutex::new(async_input_transmitter_midi),
     })
     .manage(oscbridge::AsyncInputTransmit {
       inner: Mutex::new(async_input_transmitter_osc),
     })
-    .invoke_handler(tauri::generate_handler![midibridge::sendmidi, oscbridge::sendosc])
+    .invoke_handler(tauri::generate_handler![
+      midibridge::sendmidi,
+      oscbridge::sendosc,
+      ndi::ndi_configure,
+      ndi::ndi_send_frame,
+      ndi::ndi_status,
+      ndi::ndi_find_sources,
+      ndi::ndi_restart_app
+    ])
     .setup(|app| {
-      let window = Arc::new(app.get_window("main").unwrap());
+      app.manage(ndi::NdiState::new(app.path().app_config_dir()?));
+      let window = Arc::new(app.get_webview_window("main").unwrap());
       let logger = Logger { window };
       midibridge::init(
         logger.clone(),
