@@ -21,6 +21,7 @@ export function getMidiDeviceNamesString(devices) {
  * @param {string | number} indexOrName
  * @param {Input[] | Output[]} devices
  * @returns {Input | Output | undefined}
+ * @tags utility
  */
 export function getDevice(indexOrName, devices) {
   if (typeof indexOrName === 'number') {

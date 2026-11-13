@@ -37,6 +37,7 @@ const pitchesCache = new Map();
  * The root note defaults to octave 3, if no octave number is given.
  *
  * @name edoScale
+ * @tags utility
  * @param {string} scale Definition of EDO scale.
  * @returns Pattern
  * @example

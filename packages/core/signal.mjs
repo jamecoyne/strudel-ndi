@@ -43,7 +43,7 @@ export const signal = (func) => {
  *  A sawtooth signal between 0 and 1.
  *
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * note("<c3 [eb3,g3] g2 [g3,bb3]>*8")
  * .clip(saw.slow(2))
@@ -66,7 +66,7 @@ export const saw2 = saw.toBipolar();
  *  A sawtooth signal between 1 and 0 (like `saw`, but flipped).
  *
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * note("<c3 [eb3,g3] g2 [g3,bb3]>*8")
  * .clip(isaw.slow(2))
@@ -96,7 +96,7 @@ export const sine2 = signal((t) => Math.sin(Math.PI * 2 * t));
 /**
  *  A sine signal between 0 and 1.
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * n(sine.segment(16).range(0,15))
  * .scale("C:minor")
@@ -108,7 +108,7 @@ export const sine = sine2.fromBipolar();
  *  A cosine signal between 0 and 1.
  *
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * n(stack(sine,cosine).segment(16).range(0,15))
  * .scale("C:minor")
@@ -127,7 +127,7 @@ export const cosine2 = sine2._early(Fraction(1).div(4));
 /**
  *  A square signal between 0 and 1.
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * n(square.segment(4).range(0,7)).scale("C:minor")
  *
@@ -162,7 +162,7 @@ export const isquare2 = isquare.toBipolar();
  *  A triangle signal between 0 and 1.
  *
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * n(tri.segment(8).range(0,7)).scale("C:minor")
  *
@@ -181,7 +181,7 @@ export const tri2 = fastcat(saw2, isaw2);
  *  An inverted triangle signal between 1 and 0 (like `tri`, but flipped).
  *
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  * @example
  * n(itri.segment(8).range(0,7)).scale("C:minor")
  *
@@ -200,7 +200,7 @@ export const itri2 = fastcat(isaw2, saw2);
  *  A signal representing the cycle time.
  *
  * @return {Pattern}
- * @tags generators
+ * @tags generators, pattern
  */
 export const time = signal(id);
 
@@ -209,7 +209,7 @@ export const time = signal(id);
  * @name mousex
  * @synonyms mouseX
  * @return {Pattern}
- * @tags external_io
+ * @tags external_io, pattern
  * @example
  * n(mousex.segment(4).range(0,7)).scale("C:minor")
  *
@@ -220,7 +220,7 @@ export const time = signal(id);
  * @name mousey
  * @synonyms mouseY
  * @return {Pattern}
- * @tags external_io
+ * @tags external_io, pattern
  * @example
  * n(mousey.segment(4).range(0,7)).scale("C:minor")
  *
@@ -413,7 +413,7 @@ export const binaryNL = (n, nBits = 16) => {
  * Creates a list of random numbers of the given length
  *
  * @name randL
- * @tags generators
+ * @tags generators, pattern
  * @param {number} n Number of random numbers to sample
  * @example
  * s("saw").seg(16).n(irand(12)).scale("F1:minor")
@@ -447,7 +447,7 @@ const _rearrangeWith = (ipat, n, pat) => {
  * Slices a pattern into the given number of parts, then plays those parts in random order.
  * Each part will be played exactly once per cycle.
  * @name shuffle
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * note("c d e f").sound("piano").shuffle(4)
  * @example
@@ -461,7 +461,7 @@ export const shuffle = register('shuffle', (n, pat) => {
  * Slices a pattern into the given number of parts, then plays those parts at random. Similar to `shuffle`,
  * but parts might be played more than once, or not at all, per cycle.
  * @name scramble
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * note("c d e f").sound("piano").scramble(4)
  * @example
@@ -494,7 +494,7 @@ export const withSeed = (func, pat) => {
  * that use randomness, like `shuffle` and `sometimes`.
  *
  * @name seed
- * @tags math
+ * @tags math, pattern
  * @param {number} n A new seed. Can be any number.
  * @example
  * $: s("hh*4").degrade();
@@ -508,7 +508,7 @@ export const seed = register('seed', (n, pat) => {
  * A continuous pattern of random numbers, between 0 and 1.
  *
  * @name rand
- * @tags generators
+ * @tags generators, pattern
  * @example
  * // randomly change the cutoff
  * s("bd*4,hh*8").cutoff(rand.range(500,8000))
@@ -538,7 +538,7 @@ export const brandBy = (pPat) => reify(pPat).fmap(_brandBy).innerJoin();
  * A continuous pattern of 0 or 1 (binary random)
  *
  * @name brand
- * @tags generators
+ * @tags generators, pattern
  * @example
  * s("hh*10").pan(brand)
  */
@@ -550,7 +550,7 @@ export const _irand = (i) => rand.fmap((x) => Math.trunc(x * i));
  * A continuous pattern of random integers, between 0 and n-1.
  *
  * @name irand
- * @tags generators
+ * @tags generators, pattern
  * @param {number} n max value (exclusive)
  * @example
  * // randomly select scale notes from 0 - 7 (= C to C)
@@ -608,7 +608,7 @@ export const chooseInWith = (pat, xs) => {
 
 /**
  * Chooses randomly from the given list of elements.
- * @tags temporal
+ * @tags temporal, pattern
  * @param  {...any} xs values / patterns to choose from.
  * @returns {Pattern} - a continuous pattern.
  * @example
@@ -622,7 +622,7 @@ export const chooseIn = (...xs) => chooseInWith(rand, xs);
  * Chooses from the given list of values (or patterns of values), according
  * to the pattern that the method is called on. The pattern should be in
  * the range 0 .. 1.
- * @tags temporal
+ * @tags temporal, pattern
  * @param  {...any} xs
  * @returns {Pattern}
  */
@@ -686,7 +686,7 @@ const wchooseWith = (...args) => _wchooseWith(...args).outerJoin();
 
 /**
  * Chooses randomly from the given list of elements by giving a probability to each element
- * @tags temporal
+ * @tags temporal, pattern
  * @param {...any} pairs arrays of value and weight
  * @returns {Pattern} - a continuous pattern.
  * @example
@@ -740,7 +740,7 @@ function _berlin(t, seed = 0) {
 /**
  * Generates a continuous pattern of [perlin noise](https://en.wikipedia.org/wiki/Perlin_noise), in the range 0..1.
  *
- * @tags generators
+ * @tags generators, pattern
  * @name perlin
  * @example
  * // randomly change the cutoff
@@ -753,7 +753,7 @@ export const perlin = signal((t, controls) => _perlin(t, controls.randSeed));
  * Generates a continuous pattern of [berlin noise](conceived by Jame Coyne and Jade Rowland as a joke but turned out to be surprisingly cool and useful,
  * like perlin noise but with sawtooth waves), in the range 0..1.
  *
- * @tags generators
+ * @tags generators, pattern
  * @name berlin
  * @example
  * // ascending arpeggios
@@ -792,7 +792,7 @@ export const degradeByWith = register('degradeByWith', (withPat, x, pat) => {
  * 0 = 0% chance of removal
  * 1 = 100% chance of removal
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name degradeBy
  * @memberof Pattern
  * @param {number} amount - a number between 0 and 1
@@ -818,7 +818,7 @@ export const degradeBy = register(
  *
  * Randomly removes 50% of events from the pattern. Shorthand for `.degradeBy(0.5)`
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name degrade
  * @memberof Pattern
  * @returns Pattern
@@ -864,7 +864,7 @@ export const undegradeBy = register(
  * Inverse of `degrade`: Randomly removes 50% of events from the pattern. Shorthand for `.undegradeBy(0.5)`
  * Events that would be removed by degrade are let through by undegrade and vice versa (see second example).
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name undegrade
  * @memberof Pattern
  * @returns Pattern
@@ -883,7 +883,7 @@ export const undegrade = register('undegrade', (pat) => pat._undegradeBy(0.5), t
  * Randomly applies the given function by the given probability.
  * Similar to `someCyclesBy`
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name sometimesBy
  * @memberof Pattern
  * @param {number | Pattern} probability - a number between 0 and 1
@@ -903,7 +903,7 @@ export const sometimesBy = register('sometimesBy', function (patx, func, pat) {
  *
  * Applies the given function with a 50% chance
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name sometimes
  * @memberof Pattern
  * @param {function} function - the transformation to apply
@@ -948,7 +948,7 @@ export const someCyclesBy = register('someCyclesBy', function (patx, func, pat) 
  * @name someCycles
  * @memberof Pattern
  * @returns Pattern
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * s("bd,hh*8").someCycles(x=>x.speed("0.5"))
  */
@@ -963,7 +963,7 @@ export const someCycles = register('someCycles', function (func, pat) {
  * @name often
  * @memberof Pattern
  * @returns Pattern
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * s("hh*8").often(x=>x.speed("0.5"))
  */
@@ -978,7 +978,7 @@ export const often = register('often', function (func, pat) {
  * @name rarely
  * @memberof Pattern
  * @returns Pattern
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * s("hh*8").rarely(x=>x.speed("0.5"))
  */
@@ -990,7 +990,7 @@ export const rarely = register('rarely', function (func, pat) {
  *
  * Shorthand for `.sometimesBy(0.1, fn)`
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name almostNever
  * @memberof Pattern
  * @returns Pattern
@@ -1005,7 +1005,7 @@ export const almostNever = register('almostNever', function (func, pat) {
  *
  * Shorthand for `.sometimesBy(0.9, fn)`
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name almostAlways
  * @memberof Pattern
  * @returns Pattern
@@ -1020,7 +1020,7 @@ export const almostAlways = register('almostAlways', function (func, pat) {
  *
  * Shorthand for `.sometimesBy(0, fn)` (never calls fn)
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name never
  * @memberof Pattern
  * @returns Pattern
@@ -1035,7 +1035,7 @@ export const never = register('never', function (_, pat) {
  *
  * Shorthand for `.sometimesBy(1, fn)` (always calls fn)
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name always
  * @memberof Pattern
  * @returns Pattern
@@ -1064,7 +1064,7 @@ export function _keyDown(keyname) {
  * Do something on a keypress, or array of keypresses
  * [Key name reference](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
  *
- * @tags external_io
+ * @tags external_io, pattern
  * @name whenKey
  * @memberof Pattern
  * @returns Pattern
@@ -1081,7 +1081,7 @@ export const whenKey = register('whenKey', function (input, func, pat) {
  * returns true when a key or array of keys is held
  * [Key name reference](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values)
  *
- * @tags external_io
+ * @tags external_io, utility
  * @name keyDown
  * @memberof Pattern
  * @returns Pattern

@@ -5,7 +5,7 @@ import { analysers, getAnalyzerData } from 'superdough';
 /**
  * Renders a spectrum analyzer for the incoming audio signal.
  * @name spectrum
- * @tags visualization
+ * @tags visualization, utility
  * @param {object} config optional config with options:
  * @param {integer} thickness line thickness in px (default 3)
  * @param {integer} speed scroll speed (default 1)

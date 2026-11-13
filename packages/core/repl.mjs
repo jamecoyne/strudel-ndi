@@ -124,7 +124,7 @@ export function repl({
    * Changes the global tempo to the given cycles per minute
    *
    * @name setcpm
-   * @tags temporal
+   * @tags temporal, utility
    * @alias setCpm
    * @param {number} cpm cycles per minute
    * @example
@@ -157,7 +157,7 @@ export function repl({
    * all(x => x.pianoroll())
    * ```
    *
-   * @tags combiners
+   * @tags combiners, utility
    */
   const all = function (transform) {
     allTransforms.push(transform);
@@ -173,7 +173,7 @@ export function repl({
    * $: sound("hh*8")
    * each(fast("<2 3>"))
    * ```
-   * @tags combiners
+   * @tags combiners, utility
    */
   const each = function (transform) {
     eachTransform = transform;

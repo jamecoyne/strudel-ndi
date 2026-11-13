@@ -100,7 +100,7 @@ function scaleOffset(scale, offset, note) {
  * - 5P = perfect fifth
  * - 5d = diminished fifth
  *
- * @tags tonal
+ * @tags tonal, utility
  * @param {string | number} amount Either number of semitones or interval string.
  * @returns Pattern
  * @memberof Pattern
@@ -162,7 +162,7 @@ export const { transpose, trans } = register(['transpose', 'trans'], function tr
  *
  * @memberof Pattern
  * @name scaleTranspose
- * @tags tonal
+ * @tags tonal, utility
  * @param {offset} offset number of steps inside the scale
  * @returns Pattern
  * @synonyms scaleTrans, strans
@@ -253,7 +253,7 @@ function _getNearestScaleNote(scaleName, note, preferHigher = true) {
  * The root note defaults to octave 3, if no octave number is given.
  *
  * @name scale
- * @tags tonal
+ * @tags tonal, utility
  * @param {string} scale Name of scale
  * @returns Pattern
  * @example

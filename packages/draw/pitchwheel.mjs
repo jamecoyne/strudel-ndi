@@ -147,7 +147,7 @@ export function pitchwheel({
 /**
  * Renders a pitch circle to visualize frequencies within one octave
  * @name pitchwheel
- * @tags visualization
+ * @tags visualization, utility
  * @param {number} hapcircles
  * @param {number} circle
  * @param {number} edo

@@ -68,7 +68,7 @@ const trimFreq = (freq) => parseFloat(freq.toPrecision(10));
  * @returns Pattern
  * @memberof Pattern
  * @param {(string | number[] )} scaleNameOrRatios
- * @tags tonal
+ * @tags tonal, utility
  * @example
  * // A minor triad in 31edo:
  * i("0 8 18").xen("31edo").piano()
@@ -201,7 +201,7 @@ export const xen = register(
  * @name withBase
  * @param {number} base
  * @param {number} (optional) originalBase
- * @tags tonal
+ * @tags tonal, utility
  *
  * @example
  * i("[0 1 2 3] [3 4] [4 3 2 1]").xen("hexany23").withBase("<220 [300 200]>")
@@ -243,7 +243,7 @@ export const withBase = register('withBase', (b, pat) => {
  * Transposes the frequency by `amt` edoSteps
  * @name ftranspose
  * @synonyms ftrans, fTrans, ftranspose, fTranspose
- * @tags tonal
+ * @tags tonal, utility
  * @param {number} amt
  * @param {number} edoSize (optional)
  * @returns {Pattern}

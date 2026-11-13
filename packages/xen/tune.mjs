@@ -36,7 +36,7 @@ import { register } from '@strudel/core';
  *   523.2511306012
  * ]).mul(220).freq();
  *
- * @tags tonal
+ * @tags tonal, utility
  */
 
 // Tune.scale seems to be in ratio format

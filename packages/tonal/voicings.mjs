@@ -134,7 +134,7 @@ const getVoicing = (chord, dictionaryName, lastVoicing) => {
  * Uses [chord-voicings package](https://github.com/felixroos/chord-voicings#chord-voicings).
  *
  * @name voicings
- * @tags tonal
+ * @tags tonal, utility
  * @memberof Pattern
  * @param {string} dictionary which voicing dictionary to use.
  * @returns Pattern
@@ -159,7 +159,7 @@ export const voicings = register('voicings', function (dictionary, pat) {
  * Maps the chords of the incoming pattern to root notes in the given octave.
  *
  * @name rootNotes
- * @tags tonal
+ * @tags tonal, utility
  * @memberof Pattern
  * @param {octave} octave octave to use
  * @returns Pattern
@@ -195,7 +195,7 @@ export const rootNotes = register('rootNotes', function (octave, pat) {
  * If you pass a pattern of strings to voicing, they will be interpreted as chords.
  *
  * @name voicing
- * @tags tonal
+ * @tags tonal, utility
  * @returns Pattern
  * @example
  * n("0 1 2 3").chord("<C Am F G>").voicing()

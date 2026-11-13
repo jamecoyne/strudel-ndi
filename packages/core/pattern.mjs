@@ -557,7 +557,7 @@ export class Pattern {
 
   /**
    * Returns a new pattern with the context field set to every hap set to the given value.
-   * @tags internals
+   * @tags internals, utility
    * @param {*} context
    * @returns Pattern
    * @noAutocomplete
@@ -568,7 +568,7 @@ export class Pattern {
 
   /**
    * Returns a new pattern with the given function applied to the context field of every hap.
-   * @tags internals
+   * @tags internals, utility
    * @param {Function} func
    * @returns Pattern
    * @noAutocomplete
@@ -845,7 +845,7 @@ export class Pattern {
   /**
    * Layers the result of the given function(s). Like `superimpose`, but without the original pattern:
    * @name layer
-   * @tags combiners
+   * @tags combiners, pattern
    * @memberof Pattern
    * @returns Pattern
    * @example
@@ -860,7 +860,7 @@ export class Pattern {
   /**
    * Superimposes the result of the given function(s) on top of the original pattern:
    * @name superimpose
-   * @tags combiners
+   * @tags combiners, pattern
    * @memberof Pattern
    * @returns Pattern
    * @example
@@ -924,6 +924,7 @@ export class Pattern {
   /**
    * Attaches a function that is called for each hap onset.
    * @name onSchedule
+   * @tags utility
    * @memberof Pattern
    * @example
    * s("bd sd").onSchedule((hap, time, cps) => {
@@ -958,7 +959,7 @@ export class Pattern {
 
   /**
    * Writes the content of the current event to the console (visible in the side menu).
-   * @tags visualization
+   * @tags visualization, utility
    * @name log
    * @memberof Pattern
    * @example
@@ -973,7 +974,7 @@ export class Pattern {
   /**
    * A simplified version of `log` which writes all "values" (various configurable parameters)
    * within the event to the console (visible in the side menu).
-   * @tags visualization
+   * @tags visualization, utility
    * @name logValues
    * @memberof Pattern
    * @example
@@ -1047,7 +1048,7 @@ Pattern.prototype.collect = function () {
 
 /**
  * Selects indices in in stacked notes.
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * note("<[c,eb,g]!2 [c,f,ab] [d,f,ab]>")
  * .arpWith(haps => haps[2])
@@ -1062,7 +1063,7 @@ export const arpWith = register('arpWith', (func, pat) => {
 
 /**
  * Selects indices in in stacked notes.
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * note("<[c,eb,g]!2 [c,f,ab] [d,f,ab]>")
  * .arp("0 [0,2] 1 [0,2]")
@@ -1141,7 +1142,7 @@ const COMPOSERS = {
    * @param {Pattern} pat
    * @returns {Pattern}
    * @memberof Pattern
-   * @tags internals, combiners
+   * @tags internals, combiners, pattern
    * @example
    * // because input pattern has `s` set,
    * // it overrides the "sine" declared earlier
@@ -1166,7 +1167,7 @@ const COMPOSERS = {
    * @param {Pattern} pat
    * @memberof Pattern
    * @returns {Pattern}
-   * @tags internals, combiners
+   * @tags internals, combiners, pattern
    * @example
    * // notes, already defined, will stay "c a f e",
    * // while "s", not defined, will be set to "piano"
@@ -1181,7 +1182,7 @@ const COMPOSERS = {
    * Assumes a pattern of numbers. Adds the given number to each item in the pattern.
    * @name add
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @example
    * // Here, the triad 0, 2, 4 is shifted by different amounts
    * n("0 2 4".add("<0 3 4 0>")).scale("C:major")
@@ -1199,7 +1200,7 @@ const COMPOSERS = {
    * Like add, but the given numbers are subtracted.
    * @name sub
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @example
    * n("0 2 4".sub("<0 1 2 3>")).scale("C4:minor")
    * // See add for more information.
@@ -1210,7 +1211,7 @@ const COMPOSERS = {
    * Multiplies each number by the given factor.
    * @name mul
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @example
    * "<1 1.5 [1.66, <2 2.33>]>*4".mul(150).freq()
    */
@@ -1220,7 +1221,7 @@ const COMPOSERS = {
    * Divides each number by the given factor.
    * @name div
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    */
   div: [numeralArgs((a, b) => a / b)],
   /**
@@ -1228,7 +1229,7 @@ const COMPOSERS = {
    * Divides each number by the given factor and returns the remainder
    * @name mod
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    */
   mod: [numeralArgs(_mod)],
   /**
@@ -1236,7 +1237,7 @@ const COMPOSERS = {
    * Raises each number to the power of the given factor
    * @name pow
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    */
   pow: [numeralArgs(Math.pow)],
   /**
@@ -1244,7 +1245,7 @@ const COMPOSERS = {
    * Performs a bitwise `and` on each number and the given factor
    * @name band
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    */
   band: [numeralArgs((a, b) => a & b)],
   /**
@@ -1252,7 +1253,7 @@ const COMPOSERS = {
    * Performs a bitwise `or` on each number and the given factor
    * @name bor
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    */
   bor: [numeralArgs((a, b) => a | b)],
   /**
@@ -1260,7 +1261,7 @@ const COMPOSERS = {
    * Performs a bitwise `xor` on each number and the given factor
    * @name bxor
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    */
   bxor: [numeralArgs((a, b) => a ^ b)],
   /**
@@ -1285,7 +1286,7 @@ const COMPOSERS = {
    * performs a < b
    * @name lt
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @param {any} a
    * @param {any} b
    * @returns Pattern with boolean value(s)
@@ -1295,7 +1296,7 @@ const COMPOSERS = {
    * performs a > b
    * @name gt
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @param {any} a
    * @param {any} b
    * @returns Pattern with boolean value(s)
@@ -1325,7 +1326,7 @@ const COMPOSERS = {
    * performs a == b
    * @name eq
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @param {any} a
    * @param {any} b
    * @returns Pattern with boolean value(s)
@@ -1345,7 +1346,7 @@ const COMPOSERS = {
    * performs a != b
    * @name ne
    * @memberof Pattern
-   * @tags math
+   * @tags math, pattern
    * @param {any} a
    * @param {any} b
    * @returns Pattern with boolean value(s)
@@ -1454,7 +1455,7 @@ const ALIGNMENT_KEYS = ALIGNMENTS.map((how) => how.toLowerCase());
   /**
    * Applies the given structure to the pattern:
    *
-   * @tags temporal
+   * @tags temporal, pattern
    * @example
    * note("c,eb,g")
    *   .struct("x ~ x ~ ~ x ~ x ~ ~ ~ x ~ x ~ ~")
@@ -1469,7 +1470,7 @@ const ALIGNMENT_KEYS = ALIGNMENTS.map((how) => how.toLowerCase());
   /**
    * Returns silence when mask is 0 or "~"
    *
-   * @tags temporal
+   * @tags temporal, pattern
    * @example
    * note("c [eb,g] d [eb,g]").mask("<1 [0 1]>")
    */
@@ -1482,7 +1483,7 @@ const ALIGNMENT_KEYS = ALIGNMENTS.map((how) => how.toLowerCase());
   /**
    * Resets the pattern to the start of the cycle for each onset of the reset pattern.
    *
-   * @tags temporal
+   * @tags temporal, pattern
    * @example
    * s("[<bd lt> sd]*2, hh*8").reset("<x@3 x(5,8)>")
    */
@@ -1496,7 +1497,7 @@ const ALIGNMENT_KEYS = ALIGNMENTS.map((how) => how.toLowerCase());
    * Restarts the pattern for each onset of the restart pattern.
    * While reset will only reset the current cycle, restart will start from cycle 0.
    *
-   * @tags temporal
+   * @tags temporal, pattern
    * @example
    * s("[<bd lt> sd]*2, hh*8").restart("<x@3 x(5,8)>")
    */
@@ -1517,7 +1518,7 @@ const ALIGNMENT_KEYS = ALIGNMENTS.map((how) => how.toLowerCase());
  * 'add.mix', 'set.squeeze', etc.
  *
  * @param {string} method Default join method to use. Options: 'in', 'out', 'mix', 'squeeze', 'squeezeout', 'reset', 'restart', 'poly'
- * @tags combiners
+ * @tags combiners, utility
  * @example
  * setDefaultJoin('mix') // also try 'in', 'out', 'squeeze', etc.
  * s("saw").vel("1 0.5").note("F A C E").delay("0 0.2 0.3")
@@ -1639,7 +1640,7 @@ export function sequenceP(pats) {
 /**
  * The given items are played at the same time at the same length.
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @return {Pattern}
  * @synonyms polyrhythm, pr
  * @example
@@ -1692,7 +1693,7 @@ function _stackWith(func, pats) {
  * The input patterns are aligned to the left, with silence padded to the shorter pattern(s) in the final steps if there's a stepcount disparity. See also `stackRight` and `stackCenter/stackCentre`
  *
  * @name stackLeft
- * @tags temporal, stepwise, combiners
+ * @tags temporal, stepwise, combiners, pattern
  * @return {Pattern}
  * @example
  * stackLeft("0 1 2 3", "3 4", "[4 5 6] 7 8 9 10").scale("c:minor").note()
@@ -1711,7 +1712,7 @@ export function stackLeft(...pats) {
  * The input patterns are aligned to the right, with silence padded to the shorter pattern(s) in the initial steps if there's a stepcount disparity. See also `stackLeft` and `stackCenter/stackCentre`
  *
  * @name stackRight
- * @tags temporal, stepwise, combiners
+ * @tags temporal, stepwise, combiners, pattern
  * @return {Pattern}
  * @example
  * stackRight("0 1 2 3", "3 4", "[4 5 6] 7 8 9 10").scale("c:minor").note()
@@ -1729,7 +1730,7 @@ export function stackRight(...pats) {
 /**
  * The input patterns are aligned to the right, with silence padded to the shorter pattern(s) in the initial steps if there's a stepcount disparity. See also `stackLeft` and `stackRight`
  * @name stackCenter
- * @tags temporal, stepwise, combiners
+ * @tags temporal, stepwise, combiners, pattern
  * @synonyms stackCentre
  * @return {Pattern}
  * @example
@@ -1791,7 +1792,7 @@ export function stackBy(by, ...pats) {
 /**
  * Concatenation: combines a list of patterns, switching between them successively, one per cycle.
  *
- * @tags combiners
+ * @tags combiners, pattern
  * @return {Pattern}
  * @synonyms cat
  * @example
@@ -1842,7 +1843,7 @@ export function slowcatPrime(...pats) {
 
 /** The given items are con**cat**enated, where each one takes one cycle.
  *
- * @tags combiners
+ * @tags combiners, pattern
  * @param {...any} items - The items to concatenate
  * @synonyms slowcat
  * @return {Pattern}
@@ -1864,7 +1865,7 @@ export function cat(...pats) {
  * Allows to arrange multiple patterns together over multiple cycles.
  * Takes a variable number of arrays with two elements specifying the number of cycles and the pattern to use.
  *
- * @tags combiners
+ * @tags combiners, pattern
  * @return {Pattern}
  * @example
  * arrange(
@@ -1923,14 +1924,14 @@ export function fastcat(...pats) {
 
 /** See `fastcat`
  * @name sequence
- * @tags combiners
+ * @tags combiners, pattern
  */
 export function sequence(...pats) {
   return fastcat(...pats);
 }
 
 /** Like **cat**, but the items are crammed into one cycle.
- * @tags combiners
+ * @tags combiners, pattern
  * @synonyms fastcat
  * @example
  * seq("e5", "b4", ["d5", "c5"]).note()
@@ -2002,7 +2003,7 @@ export const func = curry((a, b) => reify(b).func(a));
 /**
  * Registers a new pattern method. The method is added to the Pattern class + the standalone function is returned from register.
  *
- * @tags functional
+ * @tags functional, utility
  * @param {string | string[]} name name of the function, or an array of names to be used as synonyms
  * @param {function} func function with 1 or more params, where last is the current pattern
  * @param {bool} patternify defaults to true; if set to false, you will have more control over the arguments to `func` as they will be
@@ -2119,7 +2120,7 @@ function stepRegister(name, func, patternify = true, preserveSteps = false, join
  * Assumes a numerical pattern. Returns a new pattern with all values rounded
  * to the nearest integer.
  * @name round
- * @tags math
+ * @tags math, pattern
  * @memberof Pattern
  * @returns Pattern
  * @example
@@ -2134,7 +2135,7 @@ export const round = register('round', function (pat) {
  * replaced with `-5`.
  * @name floor
  * @memberof Pattern
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @example
  * note("42 42.1 42.5 43".floor())
@@ -2151,7 +2152,7 @@ export const log2 = register('log2', (pat) => pat.asNumber().fmap((v) => Math.lo
  * replaced with `-4`.
  * @name ceil
  * @memberof Pattern
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @example
  * note("42 42.1 42.5 43".ceil())
@@ -2162,7 +2163,7 @@ export const ceil = register('ceil', function (pat) {
 /**
  * Assumes a numerical pattern, containing unipolar values in the range 0 ..
  * 1. Returns a new pattern with values scaled to the bipolar range -1 .. 1
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @noAutocomplete
  */
@@ -2173,7 +2174,7 @@ export const toBipolar = register('toBipolar', function (pat) {
 /**
  * Assumes a numerical pattern, containing bipolar values in the range -1 .. 1
  * Returns a new pattern with values scaled to the unipolar range 0 .. 1
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @noAutocomplete
  */
@@ -2187,7 +2188,7 @@ export const fromBipolar = register('fromBipolar', function (pat) {
  * Most useful in combination with continuous patterns.
  * @name range
  * @memberof Pattern
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @example
  * s("[bd sd]*2,hh*8")
@@ -2203,7 +2204,7 @@ export const range = register('range', function (min, max, pat) {
  * following an exponential curve.
  * @name rangex
  * @memberof Pattern
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @example
  * s("[bd sd]*2,hh*8")
@@ -2218,7 +2219,7 @@ export const rangex = register('rangex', function (min, max, pat) {
  * Returns a new pattern with values scaled to the given min/max range.
  * @name range2
  * @memberof Pattern
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @example
  * s("[bd sd]*2,hh*8")
@@ -2233,7 +2234,7 @@ export const range2 = register('range2', function (min, max, pat) {
  * Returns a new pattern with just numbers.
  * @name ratio
  * @memberof Pattern
- * @tags math
+ * @tags math, pattern
  * @returns Pattern
  * @example
  * ratio("1, 5:4, 3:2").mul(110)
@@ -2252,7 +2253,7 @@ export const ratio = register('ratio', (pat) =>
 // Structural and temporal transformations
 
 /** Compress each cycle into the given timespan, leaving a gap
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * cat(
  *   s("bd sd").compress(.25,.75),
@@ -2274,7 +2275,7 @@ export const { compressSpan, compressspan } = register(['compressSpan', 'compres
 
 /**
  * speeds up a pattern like fast, but rather than it playing multiple times as fast would it instead leaves a gap in the remaining space of the cycle. For example, the following will play the sound pattern "bd sn" only once but compressed into the first half of the cycle, i.e. twice as fast.
- * @tags temporal
+ * @tags temporal, pattern
  * @name fastGap
  * @synonyms fastgap
  * @example
@@ -2330,7 +2331,7 @@ export const { focusSpan, focusspan } = register(['focusSpan', 'focusspan'], fun
 });
 
 /** The ply function repeats each event the given number of times.
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * s("bd ~ sd cp").ply("<1 2 3>")
  */
@@ -2345,7 +2346,7 @@ export const ply = register('ply', function (factor, pat) {
 /**
  * Speed up a pattern by the given factor. Used by "*" in mini notation.
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name fast
  * @synonyms density
  * @memberof Pattern
@@ -2370,7 +2371,7 @@ export const fast = register(
 
 /**
  * Both speeds up the pattern (like 'fast') and the sample playback (like 'speed').
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * s("bd sd:2").hurry("<1 2 4 3>").slow(1.5)
  */
@@ -2381,7 +2382,7 @@ export const hurry = register('hurry', function (r, pat) {
 /**
  * Slow down a pattern over the given number of cycles. Like the "/" operator in mini notation.
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name slow
  * @synonyms sparsity
  * @memberof Pattern
@@ -2399,7 +2400,7 @@ export const { slow, sparsity } = register(['slow', 'sparsity'], function (facto
 
 /**
  * Carries out an operation 'inside' a cycle.
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * "0 1 2 3 4 3 2 1".inside(4, rev).scale('C major').note()
  * // "0 1 2 3 4 3 2 1".slow(4).rev().fast(4).scale('C major').note()
@@ -2410,7 +2411,7 @@ export const inside = register('inside', function (factor, f, pat) {
 
 /**
  * Carries out an operation 'outside' a cycle.
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * "<[0 1] 2 [3 4] 5>".outside(4, rev).scale('C major').note()
  * // "<[0 1] 2 [3 4] 5>".fast(4).rev().slow(4).scale('C major').note()
@@ -2421,7 +2422,7 @@ export const outside = register('outside', function (factor, f, pat) {
 
 /**
  * Applies the given function every n cycles, starting from the last cycle.
- * @tags temporal
+ * @tags temporal, pattern
  * @name lastOf
  * @memberof Pattern
  * @param {number} n how many cycles
@@ -2438,7 +2439,7 @@ export const lastOf = register('lastOf', function (n, func, pat) {
 
 /**
  * Applies the given function every n cycles, starting from the first cycle.
- * @tags temporal
+ * @tags temporal, pattern
  * @name firstOf
  * @memberof Pattern
  * @param {number} n how many cycles
@@ -2450,7 +2451,7 @@ export const lastOf = register('lastOf', function (n, func, pat) {
 
 /**
  * An alias for `firstOf`
- * @tags temporal
+ * @tags temporal, pattern
  * @name every
  * @memberof Pattern
  * @param {number} n how many cycles
@@ -2467,7 +2468,7 @@ export const { firstOf, every } = register(['firstOf', 'every'], function (n, fu
 
 /**
  * Applies the given function to the pattern. Like layer, but with a single function:
- * @tags combiners
+ * @tags combiners, pattern
  * @name apply
  * @example
  * "<c3 eb3 g3>".scale('C minor').apply(scaleTranspose("0,2,4")).note()
@@ -2478,7 +2479,7 @@ export const apply = register('apply', function (func, pat) {
 
 /**
  * Plays the pattern at the given cycles per minute.
- * @tags temporal
+ * @tags temporal, pattern
  * @deprecated
  * @example
  * s("<bd sd>,hh*2").cpm(90) // = 90 bpm
@@ -2491,7 +2492,7 @@ export const cpm = register('cpm', function (cpm, pat) {
 /**
  * Nudge a pattern to start earlier in time. Equivalent of Tidal's <~ operator
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name early
  * @memberof Pattern
  * @param {number | Pattern} cycles number of cycles to nudge left
@@ -2512,7 +2513,7 @@ export const early = register(
 /**
  * Nudge a pattern to start later in time. Equivalent of Tidal's ~> operator
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name late
  * @memberof Pattern
  * @param {number | Pattern} cycles number of cycles to nudge right
@@ -2533,7 +2534,7 @@ export const late = register(
 /**
  * Plays a portion of a pattern, specified by the beginning and end of a time span. The new resulting pattern is played over the time period of the original pattern:
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * s("bd*2 hh*3 [sd bd]*2 perc").zoom(0.25, 0.75)
  * // s("hh*3 [sd bd]*2") // equivalent
@@ -2560,7 +2561,7 @@ export const { zoomArc, zoomarc } = register(['zoomArc', 'zoomarc'], function (a
 /**
  * Splits a pattern into the given number of slices, and plays them according to a pattern of slice numbers.
  * Similar to `slice`, but slices up patterns rather than sound samples.
- * @tags temporal
+ * @tags temporal, pattern
  * @param {number} number of slices
  * @param {number} slices to play
  * @example
@@ -2656,7 +2657,7 @@ export const { isobite, cyclestruct, cycleStruct } = register(
 
 /**
  * Selects the given fraction of the pattern and repeats that part to fill the remainder of the cycle.
- * @tags temporal
+ * @tags temporal, pattern
  * @param {number} fraction fraction to select
  * @example
  * s("lt ht mt cp, [hh oh]*2").linger("<1 .5 .25 .125>")
@@ -2677,7 +2678,7 @@ export const linger = register(
 
 /**
  * Samples the pattern at a rate of n events per cycle. Useful for turning a continuous pattern into a discrete one.
- * @tags temporal
+ * @tags temporal, pattern
  * @name segment
  * @synonyms seg
  * @param {number} segments number of segments per cycle
@@ -2690,7 +2691,7 @@ export const { segment, seg } = register(['segment', 'seg'], function (rate, pat
 
 /**
  * The function `swingBy x n` breaks each cycle into `n` slices, and then delays events in the second half of each slice by the amount `x`, which is relative to the size of the (half) slice. So if `x` is 0 it does nothing, `0.5` delays for half the note duration, and 1 will wrap around to doing nothing again. The end result is a shuffle or swing-like rhythm
- * @tags temporal
+ * @tags temporal, pattern
  * @param {number} subdivision
  * @param {number} offset
  * @example
@@ -2700,7 +2701,7 @@ export const swingBy = register('swingBy', (swing, n, pat) => pat.inside(n, late
 
 /**
  * Shorthand for swingBy with 1/3:
- * @tags temporal
+ * @tags temporal, pattern
  * @param {number} subdivision
  * @example
  * s("hh*8").swing(4)
@@ -2728,7 +2729,7 @@ export const { invert, inv } = register(
 
 /**
  * Applies the given function whenever the given pattern is in a true state.
- * @tags temporal
+ * @tags temporal, pattern
  * @name when
  * @memberof Pattern
  * @param {Pattern} binary_pat
@@ -2743,7 +2744,7 @@ export const when = register('when', function (on, func, pat) {
 
 /**
  * Superimposes the function result on top of the original pattern, delayed by the given time.
- * @tags temporal
+ * @tags temporal, pattern
  * @name off
  * @memberof Pattern
  * @param {Pattern | number} time offset time
@@ -2761,7 +2762,7 @@ export const off = register('off', function (time_pat, func, pat) {
  * fast, and offset in time by one quarter of a cycle. Creates a kind of
  * breakbeat feel.
  * @name brak
- * @tags temporal
+ * @tags temporal, pattern
  * @returns Pattern
  * @memberof Pattern
  * @example
@@ -2774,7 +2775,7 @@ export const brak = register('brak', function (pat) {
 /**
  * Reverse all cycles in a pattern. See also `revv` for reversing a whole pattern.
  *
- * @tags temporal
+ * @tags temporal, pattern
  * @name rev
  * @memberof Pattern
  * @returns Pattern
@@ -2809,7 +2810,7 @@ export const rev = register(
  * Reverse a whole pattern. See also `rev` for reversing each cycle.
  *
  * @name revv
- * @tags temporal
+ * @tags temporal, pattern
  * @memberof Pattern
  * @returns Pattern
  * @example
@@ -2850,7 +2851,7 @@ export const press = register('press', function (pat) {
 
 /**
  * Silences a pattern.
- * @tags temporal
+ * @tags temporal, utility
  * @example
  * stack(
  *   s("bd").hush(),
@@ -2863,7 +2864,7 @@ Pattern.prototype.hush = function () {
 
 /**
  * Applies `rev` to a pattern every other cycle, so that the pattern alternates between forwards and backwards.
- * @tags temporal
+ * @tags temporal, pattern
  * @example
  * note("c d e g").palindrome()
  */
@@ -2878,7 +2879,7 @@ export const palindrome = register(
 
 /**
  * Jux with adjustable stereo width. 0 = mono, 1 = full stereo.
- * @tags temporal
+ * @tags temporal, audio
  * @name juxBy
  * @synonyms juxby
  * @example
@@ -2901,6 +2902,7 @@ export const { juxBy, juxby } = register(['juxBy', 'juxby'], function (by, func,
 /**
  * Like juxBy, except it flips the ears each cycle.
  * @name juxFlipBy
+ * @tags audio
  * @synonyms juxflipby, fluxBy, fluxby
  * @example
  * s("bd lt [~ ht] mt cp ~ bd hh").juxFlipBy(".8", rev)
@@ -2914,7 +2916,7 @@ export const { juxFlipBy, juxflipby, fluxBy, fluxby } = register(
 
 /**
  * The jux function creates strange stereo effects, by applying a function to a pattern, but only in the right-hand channel.
- * @tags temporal, superdough
+ * @tags temporal, superdough, audio
  * @example
  * s("bd lt [~ ht] mt cp ~ bd hh").jux(rev)
  * @example
@@ -2929,6 +2931,7 @@ export const jux = register('jux', function (func, pat) {
 /**
  * Like jux, but flips the ears each cycle.
  * @name juxFlip
+ * @tags audio
  * @synonyms juxflip, flux
  * @example
  * s("bd lt [~ ht] mt cp ~ bd hh").juxFlip(rev)
@@ -2943,7 +2946,7 @@ export const { juxFlip, flux } = register(['juxFlip', 'juxflip', 'flux'], functi
 
 /**
  * Superimpose and offset multiple times, applying the given function each time.
- * @tags temporal, functional
+ * @tags temporal, functional, pattern
  * @name echoWith
  * @synonyms echowith, stutWith, stutwith
  * @param {number} times how many times to repeat
@@ -2963,7 +2966,7 @@ export const { echoWith, echowith, stutWith, stutwith } = register(
 
 /**
  * Superimpose and offset multiple times, gradually decreasing the velocity
- * @tags temporal
+ * @tags temporal, pattern
  * @name echo
  * @memberof Pattern
  * @returns Pattern
@@ -2979,7 +2982,7 @@ export const echo = register('echo', function (times, time, feedback, pat) {
 
 /**
  * Deprecated. Like echo, but the last 2 parameters are flipped.
- * @tags temporal
+ * @tags temporal, pattern
  * @name stut
  * @param {number} times how many times to repeat
  * @param {number} feedback velocity multiplicator for each iteration
@@ -3001,7 +3004,7 @@ export const applyN = register('applyN', function (n, func, p) {
 
 /**
  * The plyWith function repeats each event the given number of times, applying the given function to each event.\n
- * @tags temporal
+ * @tags temporal, pattern
  * @name plyWith
  * @synonyms plywith
  * @param {number} factor how many times to repeat
@@ -3024,7 +3027,7 @@ export const plyWith = register(['plyWith', 'plywith'], function (factor, func, 
 /**
  * The plyForEach function repeats each event the given number of times, applying the given function to each event.
  * This version of ply uses the iteration index as an argument to the function, similar to echoWith.
- * @tags temporal
+ * @tags temporal, pattern
  * @name plyForEach
  * @synonyms plyforeach
  * @param {number} factor how many times to repeat
@@ -3046,7 +3049,7 @@ export const plyForEach = register(['plyForEach', 'plyforeach'], function (facto
 
 /**
  * Divides a pattern into a given number of subdivisions, plays the subdivisions in order, but increments the starting subdivision each cycle. The pattern wraps to the first subdivision after the last subdivision is played.
- * @tags temporal
+ * @tags temporal, pattern
  * @name iter
  * @memberof Pattern
  * @returns Pattern
@@ -3074,7 +3077,7 @@ export const iter = register(
 
 /**
  * Like `iter`, but plays the subdivisions in reverse order. Known as iter' in tidalcycles
- * @tags temporal
+ * @tags temporal, pattern
  * @name iterBack
  * @synonyms iterback
  * @memberof Pattern
@@ -3093,7 +3096,7 @@ export const { iterBack, iterback } = register(
 
 /**
  * Repeats each cycle the given number of times.
- * @tags temporal
+ * @tags temporal, pattern
  * @name repeatCycles
  * @memberof Pattern
  * @returns Pattern
@@ -3117,7 +3120,7 @@ export const { repeatCycles } = register(
 
 /**
  * Divides a pattern into a given number of parts, then cycles through those parts in turn, applying the given function to each part in turn (one part per cycle).
- * @tags temporal, functional
+ * @tags temporal, functional, pattern
  * @name chunk
  * @synonyms slowChunk, slowchunk
  * @memberof Pattern
@@ -3149,7 +3152,7 @@ export const { chunk, slowchunk, slowChunk } = register(
 
 /**
  * Like `chunk`, but cycles through the parts in reverse order. Known as chunk' in tidalcycles
- * @tags temporal
+ * @tags temporal, pattern
  * @name chunkBack
  * @synonyms chunkback
  * @memberof Pattern
@@ -3170,7 +3173,7 @@ export const { chunkBack, chunkback } = register(
 /**
  * Like `chunk`, but the cycles of the source pattern aren't repeated
  * for each set of chunks.
- * @tags temporal
+ * @tags temporal, pattern
  * @name fastChunk
  * @synonyms fastchunk
  * @memberof Pattern
@@ -3191,7 +3194,7 @@ export const { fastchunk, fastChunk } = register(
 
 /**
  * Like `chunk`, but the function is applied to a looped subcycle of the source pattern.
- * @tags temporal
+ * @tags temporal, pattern
  * @name chunkInto
  * @synonyms chunkinto
  * @memberof Pattern
@@ -3284,7 +3287,7 @@ export const hsl = register('hsl', (h, s, l, pat) => {
 /**
  * Tags each Hap with an identifier. Good for filtering. The function populates Hap.context.tags (Array).
  * @name tag
- * @tags temporal
+ * @tags temporal, utility
  * @param {string} tag anything unique
  * @example
  * s("saw!16").note("F1")
@@ -3300,7 +3303,7 @@ Pattern.prototype.tag = function (tag) {
 /**
  * Filters haps using the given function
  * @name filter
- * @tags temporal, functional
+ * @tags temporal, functional, pattern
  * @param {Function} test function to test Hap
  * @example
  * s("hh!7 oh").filter(hap => hap.value.s === 'hh')
@@ -3310,7 +3313,7 @@ export const filter = register('filter', (test, pat) => pat.withHaps((haps) => h
 /**
  * Filters haps by their begin time
  * @name filterWhen
- * @tags temporal, functional
+ * @tags temporal, functional, pattern
  * @param {Function} test function to test Hap.whole.begin
  * @example
  * oneCycle: s("bd*4").filterWhen((t) => t < 1)
@@ -3320,7 +3323,7 @@ export const filterWhen = register('filterWhen', (test, pat) => pat.filter((h) =
 /**
  * Use within to apply a function to only a part of a pattern.
  * @name within
- * @tags temporal, functional
+ * @tags temporal, functional, pattern
  * @param {number} start start within cycle (0 - 1)
  * @param {number} end end within cycle (0 - 1). Must be > start
  * @param {Function} func function to be applied to the sub-pattern
@@ -3395,7 +3398,7 @@ export function _match(span, hap_p) {
  * *Experimental*
  *
  * Speeds a pattern up or down, to fit to the given number of steps per cycle.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @example
  * sound("bd sd cp").pace(4)
  * // The same as sound("{bd sd cp}%4") or sound("<bd sd cp>*4")
@@ -3437,7 +3440,7 @@ export function _polymeterListSteps(steps, ...args) {
  * *Experimental*
  *
  * Aligns the steps of the patterns, creating polymeters. The patterns are repeated until they all fit the cycle. For example, in the below the first pattern is repeated twice, and the second is repeated three times, to fit the lowest common multiple of six steps.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @synonyms pm
  * @example
  * // The same as note("{c eb g, c2 g2}%6")
@@ -3470,7 +3473,7 @@ export function polymeter(...args) {
  * The steps can either be inferred from the pattern, or provided as a [length, pattern] pair.
  * Has the alias `timecat`.
  * @name stepcat
- * @tags stepwise
+ * @tags stepwise, pattern
  * @synonyms timeCat, timecat
  * @return {Pattern}
  * @example
@@ -3528,7 +3531,7 @@ export function stepcat(...timepats) {
  * Concatenates patterns stepwise, according to an inferred 'steps per cycle'.
  * Similar to `stepcat`, but if an argument is a list, the whole pattern will alternate between the elements in the list.
  *
- * @tags stepwise
+ * @tags stepwise, pattern
  * @return {Pattern}
  * @example
  * stepalt(["bd cp", "mt"], "bd").sound()
@@ -3555,7 +3558,7 @@ export function stepalt(...groups) {
  *
  * Takes the given number of steps from a pattern (dropping the rest).
  * A positive number will take steps from the start of a pattern, and a negative number from the end.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @return {Pattern}
  * @example
  * "bd cp ht mt".take("2").sound()
@@ -3600,7 +3603,7 @@ export const take = stepRegister('take', function (i, pat) {
  *
  * Drops the given number of steps from a pattern.
  * A positive number will drop steps from the start of a pattern, and a negative number from the end.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @return {Pattern}
  * @example
  * "tha dhi thom nam".drop("1").sound().bank("mridangam")
@@ -3629,7 +3632,7 @@ export const drop = stepRegister('drop', function (i, pat) {
  * `extend` is similar to `fast` in that it increases its density, but it also increases the step count
  * accordingly. So `stepcat("a b".extend(2), "c d")` would be the same as `"a b a b c d"`, whereas
  * `stepcat("a b".fast(2), "c d")` would be the same as `"[a b] [a b] c d"`.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @example
  * stepcat(
  *   sound("bd bd - <cp hh>").extend(2),
@@ -3645,7 +3648,7 @@ export const extend = stepRegister('extend', function (factor, pat) {
  *
  * `replicate` is similar to `extend`, except that `replicate` will "replicate" the thing being extended. This will only differ from `extend` when the input pattern differs from cycle to cycle.
  *
- * @tags stepwise
+ * @tags stepwise, pattern
  * @example
  * stepcat(
  *   sound("bd bd - <cp hh>").replicate(2),
@@ -3660,7 +3663,7 @@ export const replicate = stepRegister('replicate', function (factor, pat) {
  * *Experimental*
  *
  * Expands the step size of the pattern by the given factor.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @example
  * sound("tha dhi thom nam").bank("mridangam").expand("3 2 1 1 2 3").pace(8)
  */
@@ -3672,7 +3675,7 @@ export const expand = stepRegister('expand', function (factor, pat) {
  * *Experimental*
  *
  * Contracts the step size of the pattern by the given factor. See also `expand`.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @example
  * sound("tha dhi thom nam").bank("mridangam").contract("3 2 1 1 2 3").pace(8)
  */
@@ -3732,7 +3735,7 @@ export const growlist = (amount, pat) => pat.growlist(amount);
  * Progressively shrinks the pattern by 'n' steps until there's nothing left, or if a second value is given (using mininotation list syntax with `:`),
  * that number of times.
  * A positive number will progressively drop steps from the start of a pattern, and a negative number from the end.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @return {Pattern}
  * @example
  * "tha dhi thom nam".shrink("1").sound()
@@ -3772,7 +3775,7 @@ export const shrink = register(
  * Progressively grows the pattern by 'n' steps until the full pattern is played, or if a second value is given (using mininotation list syntax with `:`),
  * that number of times.
  * A positive number will progressively grow steps from the start of a pattern, and a negative number from the end.
- * @tags stepwise
+ * @tags stepwise, pattern
  * @return {Pattern}
  * @example
  * "tha dhi thom nam".grow("1").sound()
@@ -3813,7 +3816,7 @@ export const grow = register(
  * on successive repetitions. The patterns are added together stepwise, with all repetitions taking place over a single cycle. Using `pace` to set the
  * number of steps per cycle is therefore usually recommended.
  *
- * @tags stepwise
+ * @tags stepwise, pattern
  * @return {Pattern}
  * @example
  * "[c g]".tour("e f", "e f g", "g f e c").note()
@@ -3840,7 +3843,7 @@ Pattern.prototype.tour = function (...many) {
  * 'zips' together the steps of the provided patterns. This can create a long repetition, taking place over a single, dense cycle.
  * Using `pace` to set the number of steps per cycle is therefore usually recommended.
  *
- * @tags stepwise
+ * @tags stepwise, pattern
  * @returns {Pattern}
  * @example
  * zip("e f", "e f g", "g [f e] a f4 c").note()
@@ -3892,7 +3895,7 @@ Pattern.prototype.steps = Pattern.prototype.pace;
  * Cuts each sample into the given number of parts, allowing you to explore a technique known as 'granular synthesis'.
  * It turns a pattern of samples into a pattern of parts of samples.
  * @name chop
- * @tags samples
+ * @tags samples, pattern
  * @memberof Pattern
  * @returns Pattern
  * @example
@@ -3923,7 +3926,7 @@ export const chop = register('chop', function (n, pat) {
 /**
  * Cuts each sample into the given number of parts, triggering progressive portions of each sample at each loop.
  * @name striate
- * @tags samples
+ * @tags samples, pattern
  * @memberof Pattern
  * @returns Pattern
  * @example
@@ -3942,7 +3945,7 @@ export const striate = register('striate', function (n, pat) {
 /**
  * Makes the sample fit the given number of cycles by changing the speed.
  * @name loopAt
- * @tags samples, pitch
+ * @tags samples, pitch, pattern
  * @memberof Pattern
  * @returns Pattern
  * @example
@@ -3965,7 +3968,7 @@ export const { loopAt, loopat } = register(['loopAt', 'loopat'], function (facto
  * Chops samples into the given number of slices, triggering those slices with a given pattern of slice numbers.
  * Instead of a number, it also accepts a list of numbers from 0 to 1 to slice at specific points.
  * @name slice
- * @tags samples
+ * @tags samples, pattern
  * @memberof Pattern
  * @returns Pattern
  * @example
@@ -4019,7 +4022,7 @@ Pattern.prototype.onTriggerTime = function (func) {
 /**
  * Works the same as slice, but changes the playback speed of each slice to match the duration of its step.
  * @name splice
- * @tags samples, pitch
+ * @tags samples, pitch, pattern
  * @example
  * samples('github:tidalcycles/dirt-samples')
  * s("breaks165")
@@ -4052,7 +4055,7 @@ export const splice = register(
  * Makes the sample fit its event duration. Good for rhythmical loops like drum breaks.
  * Similar to `loopAt`.
  * @name fit
- * @tags samples, pitch
+ * @tags samples, pitch, pattern
  * @example
  * samples({ rhodes: 'https://cdn.freesound.org/previews/132/132051_316502-lq.mp3' })
  * s("rhodes/2").fit()
@@ -4105,7 +4108,7 @@ let fadeGain = (p) => (p < 0.5 ? 1 : 1 - (p - 0.5) / 0.5);
  * - 1 = (no left, full right)
  *
  * @name xfade
- * @tags amplitude
+ * @tags amplitude, pattern
  * @example
  * xfade(s("bd*2"), "<0 .25 .5 .75 1>", s("hh*8"))
  */
@@ -4231,7 +4234,7 @@ const _distortWithAlg = function (name) {
  * Soft-clipping distortion
  *
  * @name soft
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4242,7 +4245,7 @@ export const soft = _distortWithAlg('soft');
  * Hard-clipping distortion
  *
  * @name hard
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4253,7 +4256,7 @@ export const hard = _distortWithAlg('hard');
  * Cubic polynomial distortion
  *
  * @name cubic
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4264,7 +4267,7 @@ export const cubic = _distortWithAlg('cubic');
  * Diode-emulating distortion
  *
  * @name diode
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4275,7 +4278,7 @@ export const diode = _distortWithAlg('diode');
  * Asymmetrical diode distortion
  *
  * @name asym
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4286,7 +4289,7 @@ export const asym = _distortWithAlg('asym');
  * Wavefolding distortion
  *
  * @name fold
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4297,7 +4300,7 @@ export const fold = _distortWithAlg('fold');
  * Wavefolding distortion composed with sinusoid
  *
  * @name sinefold
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *
@@ -4308,7 +4311,7 @@ export const sinefold = _distortWithAlg('sinefold');
  * Distortion via Chebyshev polynomials
  *
  * @name chebyshev
- * @tags distortion, superdough
+ * @tags distortion, superdough, audio
  * @param {number | Pattern} distortion amount of distortion to apply
  * @param {number | Pattern} volume linear postgain of the distortion
  *

@@ -28,7 +28,7 @@ const _pick = function (lookup, pat, modulo = true) {
 
 /** * Picks patterns (or plain values) either from a list (by index) or a lookup table (by name).
  * Similar to `inhabit`, but maintains the structure of the original patterns.
- * @tags combiners
+ * @tags combiners, pattern
  * @param {Pattern} pat
  * @param {*} xs
  * @returns {Pattern}
@@ -69,7 +69,7 @@ export const pickmod = register('pickmod', function (lookup, pat) {
 });
 
 /** * pickF lets you use a pattern of numbers to pick which function to apply to another pattern.
- * @tags combiners, functional
+ * @tags combiners, functional, pattern
  * @param {Pattern} pat
  * @param {Pattern} lookup a pattern of indices or names
  * @param {function[] | object} lookup the array or lookup object of functions from which to pull
@@ -100,7 +100,7 @@ export const pickmodF = register('pickmodF', function (pickPattern, lookup, pat)
 });
 
 /** * Similar to `pick`, but it applies an outerJoin instead of an innerJoin.
- * @tags combiners
+ * @tags combiners, pattern
  * @param {Pattern} pat
  * @param {*} xs
  * @returns {Pattern}
@@ -174,7 +174,7 @@ export const pickmodReset = register('pickmodReset', function (lookup, pat) {
 /** Picks patterns (or plain values) either from a list (by index) or a lookup table (by name).
  * Similar to `pick`, but cycles are squeezed into the target ('inhabited') pattern.
  * @name inhabit
- * @tags combiners
+ * @tags combiners, pattern
  * @synonyms pickSqueeze
  * @param {Pattern} pat
  * @param {*} xs
@@ -211,7 +211,7 @@ export const { inhabitmod, pickmodSqueeze } = register(['inhabitmod', 'pickmodSq
 /**
  * Pick from the list of values (or patterns of values) via the index using the given
  * pattern of integers. The selected pattern will be compressed to fit the duration of the selecting event
- * @tags combiners
+ * @tags combiners, pattern
  * @param {Pattern} pat
  * @param {*} xs
  * @returns {Pattern}

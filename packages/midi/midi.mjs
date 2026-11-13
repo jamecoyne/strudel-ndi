@@ -287,7 +287,7 @@ function sendNote(note, velocity, duration, device, midichan, timeMs) {
 
 /**
  * MIDI output: Opens a MIDI output port.
- * @tags external_io
+ * @tags external_io, utility
  * @param {string | number} midiport MIDI device name or index defaulting to 0
  * @param {object} options Additional MIDI configuration options
  * @example
@@ -516,7 +516,7 @@ const midiInputs = {};
  * The output is a function that accepts a midi cc value to query as well as (optionally) a midi channel
  *
  * @name midin
- * @tags external_io, midi
+ * @tags external_io, midi, utility
  * @param {string | number} input MIDI device name or index defaulting to 0
  * @returns {function(number, number=): Pattern} A function from (cc, channel?) to a pattern.
  *   When queried, the pattern will produces the most recently received midi value (normalized to 0 to 1)
@@ -546,7 +546,7 @@ export async function midin(input) {
  * so it could be filtered or manipulated further in the chain.
  *
  * @name midikeys
- * @tags external_io, midi
+ * @tags external_io, midi, utility
  * @param {string | number} input MIDI device name or index defaulting to 0
  * @returns {function((number | Pattern)=): Pattern} A function that produces a pattern.
  *   When queried, the pattern will produces the most recently played midi notes and velocities,

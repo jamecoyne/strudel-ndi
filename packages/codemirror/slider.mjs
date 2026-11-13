@@ -117,7 +117,7 @@ export const sliderPlugin = ViewPlugin.fromClass(
  * Displays a slider widget to allow the user manipulate a value
  *
  * @name slider
- * @tags external_io, visualization
+ * @tags external_io, visualization, utility
  * @param {number} value Initial value
  * @param {number} min Minimum value - optional, defaults to 0
  * @param {number} max Maximum value - optional, defaults to 1

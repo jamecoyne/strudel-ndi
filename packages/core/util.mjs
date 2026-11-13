@@ -74,6 +74,7 @@ const pcs = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
 /**
  * @deprecated only used in workshop (first-notes)
  * @noAutocomplete
+ * @tags utility
  */
 export const midi2note = (n) => {
   const oct = Math.floor(n / 12) - 1;

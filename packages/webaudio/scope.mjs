@@ -98,7 +98,7 @@ function clearScreen(smear = 0, smearRGB = `0,0,0`, ctx = getDrawContext()) {
 /**
  * Renders an oscilloscope for the frequency domain of the audio signal.
  * @name fscope
- * @tags visualization
+ * @tags visualization, utility
  * @param {string} color line color as hex or color name. defaults to white.
  * @param {number} scale scales the y-axis. Defaults to 0.25
  * @param {number} pos y-position relative to screen height. 0 = top, 1 = bottom of screen
@@ -123,7 +123,7 @@ Pattern.prototype.fscope = function (config = {}) {
  * Renders an oscilloscope for the time domain of the audio signal.
  * @name scope
  * @synonyms tscope
- * @tags visualization
+ * @tags visualization, utility
  * @param {object} config optional config with options:
  * @param {boolean} align if 1, the scope will be aligned to the first zero crossing. defaults to 1
  * @param {string} color line color as hex or color name. defaults to white.

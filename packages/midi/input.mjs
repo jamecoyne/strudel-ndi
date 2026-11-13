@@ -34,6 +34,7 @@ export class MidiInput {
    * Implementation for the cc() factory function tied to this specific input.
    * @param {number} cc MIDI CC number
    * @param {number | undefined} chan MIDI channel (1-16) or undefined for all channels
+   * @tags utility
    */
   createCC(cc, chan) {
     const lookupMap = chan === undefined ? this._refs : this._refsByChan[chan];

@@ -38,7 +38,7 @@ function humanFileSize(bytes, si) {
  *
  * @name getDuration
  * @synonym getDur
- * @tags samples
+ * @tags samples, utility
  * @param {string} sampleName
  * @param {number} (optional) n
  *
@@ -259,7 +259,7 @@ export async function fetchSampleMap(url) {
 
 /**
  * Loads a collection of samples to use with `s`
- * @tags samples
+ * @tags samples, utility
  * @example
  * samples('github:tidalcycles/dirt-samples');
  * s("[bd ~]*2, [~ hh]*2, ~ sd")

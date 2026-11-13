@@ -40,7 +40,7 @@ export let maxPolyphony = DEFAULT_MAX_POLYPHONY;
  * start to die out in first-in-first-out order once the max polyphony has been hit
  *
  * @name setMaxPolyphony
- * @tags superdough
+ * @tags superdough, utility
  * @param {number} Max polyphony. Defaults to 128
  * @example
  * setMaxPolyphony(4)
@@ -74,7 +74,7 @@ export function applyGainCurve(val) {
  * quadratic, exponential, etc. rather than linear
  *
  * @name setGainCurve
- * @tags amplitude, superdough
+ * @tags amplitude, superdough, utility
  * @param {Function} function to apply to all gain values
  * @example
  * setGainCurve((x) => x * x) // quadratic gain
@@ -131,7 +131,7 @@ async function aliasBankPath(path) {
  * @param {string} bank - The bank to alias
  * @param {string} alias - The alias to use for the bank
  *
- * @tags samples
+ * @tags samples, utility
  */
 export async function aliasBank(...args) {
   switch (args.length) {
@@ -150,7 +150,7 @@ export async function aliasBank(...args) {
 
 /**
  * Register an alias for a sound.
- * @tags samples
+ * @tags samples, utility
  * @param {string} original - The original sound name
  * @param {string} alias - The alias to use for the sound
  */

@@ -186,7 +186,7 @@ export function registerWaveTable(key, tables, params) {
  * Loads a collection of wavetables to use with `s`
  *
  * @name tables
- * @tags wavetable
+ * @tags wavetable, utility
  */
 export const tables = async (url, frameLen, json, options = {}) => {
   if (json !== undefined) return _processTables(json, url, frameLen);

@@ -20,7 +20,7 @@ let D;
  * initializes dough ahead of time. you don't need to use this, but if you do, you can await it, so dough is ready before the pattern starts.
  *
  * @name initDough
- * @tags external_io
+ * @tags external_io, utility
  * @memberof Pattern
  * @example
  * await initDough()
@@ -54,7 +54,7 @@ export async function doughOutput(hap, targetTime, cps = 1) {
  * Uses dough as the audio engine. more info at https://dough.strudel.cc
  *
  * @name dough
- * @tags external_io
+ * @tags external_io, utility
  * @memberof Pattern
  * @returns Pattern
  * @example

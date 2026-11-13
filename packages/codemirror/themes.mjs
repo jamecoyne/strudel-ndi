@@ -2,6 +2,7 @@ import strudelTheme, { settings as strudelThemeSettings } from './themes/strudel
 import bluescreen, { settings as bluescreenSettings } from './themes/bluescreen.mjs';
 import blackscreen, { settings as blackscreenSettings } from './themes/blackscreen.mjs';
 import whitescreen, { settings as whitescreenSettings } from './themes/whitescreen.mjs';
+import rgbLight, { settings as rgbLightSettings } from './themes/rgbLight.mjs';
 import teletext, { settings as teletextSettings } from './themes/teletext.mjs';
 import algoboy, { settings as algoboySettings } from './themes/algoboy.mjs';
 import CutiePi, { settings as CutiePiSettings } from './themes/CutiePi.mjs';
@@ -80,6 +81,7 @@ export const themes = {
   vscodeDark,
   vscodeLight,
   whitescreen,
+  rgbLight,
   xcodeLight,
 };
 
@@ -89,6 +91,7 @@ export const settings = {
   bluescreenlight: bluescreenlightsettings,
   blackscreen: blackscreenSettings,
   whitescreen: whitescreenSettings,
+  rgbLight: rgbLightSettings,
   teletext: teletextSettings,
   algoboy: algoboySettings,
   archBtw: archBtwSettings,

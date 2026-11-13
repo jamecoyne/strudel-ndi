@@ -12,7 +12,7 @@ let isStarted;
 
 /**
  * @name getTime
- * @tags internals
+ * @tags internals, utility
  * @returns {Number} the current cycle time as a number
  */
 export function getTime() {
@@ -29,7 +29,7 @@ export function setTime(func) {
 let clockTime;
 /**
  * @name getClockTime
- * @tags internals
+ * @tags internals, utility
  * @returns {Number} the current clock time in seconds (onSchedule time)
  */
 export function getClockTime() {
@@ -49,7 +49,7 @@ export function setCpsFunc(func) {
 
 /**
  * @name getCps
- * @tags internals
+ * @tags internals, utility
  * @returns {Number} the current cycles per second
  */
 export function getCps() {

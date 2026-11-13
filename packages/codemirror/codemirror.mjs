@@ -398,6 +398,7 @@ function s4() {
 /**
  * Overrides the css of highlighted events. Make sure to use single quotes!
  * @name markcss
+ * @tags utility
  * @tag visualization
  * @example
  * note("c a f e")

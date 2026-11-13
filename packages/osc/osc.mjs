@@ -93,7 +93,7 @@ export async function oscOutput(hap, targetTime, cps = 1) {
  * For more info, read [MIDI & OSC in the docs](https://strudel.cc/learn/input-output/)
  *
  * @name osc
- * @tags external_io
+ * @tags external_io, utility
  * @memberof Pattern
  * @returns Pattern
  */

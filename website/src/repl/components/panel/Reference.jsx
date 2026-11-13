@@ -38,11 +38,13 @@ const availableFunctions = (() => {
 
 const tagCounts = {};
 const ignoredTags = ['superdirt'];
+// only these categories are offered as filters; other tags stay on each entry for display
+const categoryTags = ['pattern', 'audio', 'utility'];
 // const tagOptions = { all: `all (${availableFunctions.length})` };
 const tagOptions = { all: `all` };
 for (const doc of availableFunctions) {
   (doc.tags || ['untagged']).forEach((t) => {
-    if (typeof t === 'string' && t && !ignoredTags.includes(t)) {
+    if (typeof t === 'string' && categoryTags.includes(t)) {
       tagCounts[t] = (tagCounts[t] || 0) + 1;
       //tagOptions[t] = `${t} (${tagCounts[t]})`;
       tagOptions[t] = t;
